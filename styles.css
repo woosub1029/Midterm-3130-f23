@@ -52,8 +52,8 @@ nav li {
 .cta-button {
     display: inline-block;
     padding: 15px 30px;
-    background-color: #ff4500;
-    color: white;
+    background-color: #ff4500; /* 배경 색상을 변경 */
+    color: #000000; /* 텍스트 색상을 검은색으로 변경 */
     text-decoration: none;
     border-radius: 5px;
     font-weight: bold;
