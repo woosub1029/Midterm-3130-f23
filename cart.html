@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Woosub Shopping Site</title>
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="My Sneaker Store Logo">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="product.html">Products</a></li>
+                <li><a href="cart.html">Bagging List</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="cart">
+            <h1>Bagging List</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Products</th>
+                        <th>Price</th>
+                        <th>Numbers</th>
+                        <th>Total</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody id="cart-items">
+                </tbody>
+            </table>
+            <div class="total-price">
+                <p>Total Price: ₩XXX,XXX</p>
+                
+            </div>
+            <a href="order.html">Order</a>
+
+        </section>
+    </main>
+
+    <script>
+        // 로컬 스토리지에서 장바구니 데이터를 가져와서 HTML로 렌더링
+        function renderCart() {
+            var cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+
+            var cartItemsHtml = '';
+            var total = 0;
+
+            for (var i = 0; i < cartItems.length; i++) {
+                var item = cartItems[i];
+                var subtotal = item.price;
+                total += subtotal;
+
+                cartItemsHtml += `
+                    <tr>
+                        <td>${item.name}</td>
+                        <td>$${item.price}</td>
+                        <td>1</td>
+                        <td>$${subtotal}</td>
+                        <td><button onclick="removeItem(${i})">Remove</button></td>
+                    </tr>
+                `;
+            }
+
+            document.getElementById('cart-items').innerHTML = cartItemsHtml;
+            document.querySelector('.total-price p').textContent = `Total Price: $${total}`;
+        }
+
+        // 장바구니에서 특정 항목을 제거하는 함수
+        function removeItem(index) {
+            var cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+            cartItems.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cartItems));
+            renderCart();
+        }
+
+        // 페이지가 로드될 때 장바구니 데이터를 렌더링
+        renderCart();
+    </script>
+</body>
+</html>

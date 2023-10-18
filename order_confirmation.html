@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script> 
+    <title>Order Confirmation</title>
+</head>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const params = new URLSearchParams(window.location.search);
+        const deliveryAddress = params.get('delivery-address');
+        const creditCard = params.get('credit-card');
+        const deliveryOption = params.get('shipping-option');
+
+        document.getElementById('display-address').textContent = 'Delivery Address: ' + deliveryAddress;
+        document.getElementById('display-credit-card').textContent = 'Credit Card: ' + creditCard;
+        document.getElementById('display-delivery-option').textContent = 'Delivery Option: ' + deliveryOption;
+    });
+</script>
+<body>
+    <header>
+        <img src="logo.png" alt="My Sneaker Store Logo">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="product.html">Products</a></li>
+                <li><a href="cart.html">Bagging List</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div id="order-summary">
+        <h2>Order Summary:</h2>
+        <p id="display-address"></p>
+        <p id="display-credit-card"></p>
+        <p id="display-delivery-option"></p>
+        <p id="display-totalPrice"></p>
+
+    </div>
+
+    <script>
+        showOrderSummary(); // 주문 정보를 표시하는 함수 호출
+    </script>
+</body>
+</html>
